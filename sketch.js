@@ -1,7 +1,9 @@
 let maestor;
 
 function setup() {
-  createCanvas(1000, 607);
+  print(width, height)
+  createCanvas(windowWidth, windowHeight);
+
   maestor = new Maestor(width, height);
   startAudioContext();
 }

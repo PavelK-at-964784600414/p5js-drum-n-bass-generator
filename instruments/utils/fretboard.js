@@ -20,7 +20,7 @@ class FreatBoard{
         this.offsetX = (width - this.fretboardWidth) / 2 + 10; // Calculate x offset to center the fretboard
         this.offsetY = (height - this.fretboardHeight) / 2 + 70; // Calculate y offset to center the fretboard
         this.markerFrets = [2, 4, 6, 8, 11, 14, 16, 18, 20, 23]; // Common positions for fret markers
-        this.stringOptions = {'8 strings: ': 8, '7 strings': 7, '6 strings': 6};
+        this.stringOptions = {'8 strings': 8, '7 strings': 7, '6 strings': 6};
         this.fretBaordNoteNames = this.generateNoteNames(drop);     
         this.r = 5 
         this.adaptedFretboardHeight = this.fretboardHeight * this.numStrings / 8

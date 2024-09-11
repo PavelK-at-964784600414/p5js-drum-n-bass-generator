@@ -1,47 +1,21 @@
-class Instrument{
-    constructor(cellSize, beats, sounds, offset, instrumentName){
-        // will be standat size for the grid of the instrumetn
-        this.cellSize = cellSize;
-        // Number of beats per loop 
-        this.beats = beats;
-        // Number of beats per loop 
-        this.sounds = sounds;
-        // y offset position
-        this.xOffset = offset[0];
-        // x offset position
-        this.yOffset = offset[1];
-        // Instrument name
-        this.instrumentName = instrumentName;
-        this.gridXOffset = 170;
-        this.grid = instruments[this.instrumentName].grid;
+class Drums extends Instrument{
+    constructor() {
+        super(state['beats_parts'], instruments['drums']['sounds'], instruments['drums']['offset'], 'drums');
+        super.createGrid();
+        this.setVolume();
     }
 
-
-
-
-
-    // Will create the instument beat loop grid
-    createGrid() {
-        for (let i = 0; i < instruments[this.instrumentName]['sounds'].length; i++) {
-            this.grid[i] = [];
-            for (let j = 0; j < this.beats; j++) {
-                this.grid[i][j] = { 
-                    x: j * this.cellSize + this.gridXOffset, 
-                    y: i * this.cellSize + this.yOffset, 
-                    active: false, 
-                    sound: this.sounds[i] 
-                };
-            }
+    // Sets volume of the drum rack
+    setVolume(level = 0.5){
+        for (let i = 0; i < this.sounds.length; i++)
+        {
+            this.sounds[i].setVolume(level);
         }
+        this.sounds[2].setVolume(1);
+        this.sounds[1].setVolume(0.1);
     }
 
-
-    // set value of set to the opisite when clicked
-    toggleCell(row, col) {
-        this.grid[row][col].active = !this.grid[row][col].active;
-    }
-
-    // Draw the drum machine
+    // Create the drum sample bottons 
     drawGrid() {
         strokeWeight(1);
         stroke(backGroundColor);
@@ -52,19 +26,6 @@ class Instrument{
         }
     }
 
-    /*  Update loop beat grid
-    updateGrid() {
-        if (!state['is_playing']){
-            for (let i = 0; i < this.sounds.length; i++) {
-                for (let j = 0; j < this.beats; j++) {
-                    if (mouseX > this.grid[i][j].x && mouseX < this.grid[i][j].x + this.cellSize && mouseY > this.grid[i][j].y && mouseY < this.grid[i][j].y + this.cellSize) {
-                        this.toggleCell(i, j);
-                    }
-                }
-            }
-        }
-    }
-*/
     updateGrid() {
         if (!state['is_playing']) {
         // Create a 2D array to store the active states
@@ -90,19 +51,6 @@ class Instrument{
         return null;
     }
     
-
-    loadPreset(preset) {
-        if (!state['is_playing']){
-            for (let i = 0; i < this.sounds.length; i++) {
-                for (let j = 0; j < this.beats; j++) {
-                    if (preset[i][j] === true) {
-                        this.toggleCell(i, j);
-                    }
-                }
-            }
-        }
-    }
-
 
     // Draw all the squares in teh grid
     drawMartix(){
@@ -155,4 +103,9 @@ class Instrument{
         }   
     }
 
+    // toggle value of the cell
+    toggleCell(row, col) {
+        this.grid[row][col].active = !this.grid[row][col].active;
+    }
 }
+

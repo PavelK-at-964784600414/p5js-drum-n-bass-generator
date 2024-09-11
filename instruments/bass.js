@@ -1,29 +1,10 @@
 class Bass extends Instrument {
-    constructor(cellSize, notation) {
-        super(cellSize, state['beats_parts'], instruments['bass']['sounds'], instruments['bass']['offset'], 'bass');
+    constructor(notation) {
+        super(state['beats_parts'], instruments['bass']['sounds'], instruments['bass']['offset'], 'bass');
         this.notation = notation;
         this.xOffsetButtonPanel = 110;
         this.noteFrequencies = this.notation.noteFrequencies;
-
-        // Create an oscillator
-        this.osc = new p5.Oscillator('sine');
-        
-        // Create an envelope
-        this.env = new p5.Envelope();
-        this.env.setADSR(0.03, 0.3, 0.4, 0.2); // Attack, Decay, Sustain, Release
-        this.env.setRange(10, 0); // Attack level, Release level
-
-        // Create a filter
-        this.reverb = new p5.Reverb();
-        // Connect the oscillator to the filter, and the filter to the output
-        this.osc.disconnect();
-        this.reverb.process(this.osc, 0.3, 1);
-
-
-        this.osc.start();
-        this.osc.amp(0); // Start with zero amplitude
         super.createGrid();
-        this.drawGrid();
     }
     
 
@@ -38,11 +19,11 @@ class Bass extends Instrument {
         for (let i = 0; i < pattern.length; i++) {
             if (i !== 0 && pattern[i] === 0) {
                 let chance = randomChance();
-                if (chance < 0.2) {
+                if (chance < 0.6) {
                     newList[i] = 2;
                 } else if (chance < 0.4) {
                     newList[i] = 1;
-                } else if(chance < 0.6){
+                } else if(chance < 0.2){
                     newList[i] = 3;
                 }
                 else{
@@ -68,8 +49,8 @@ class Bass extends Instrument {
     }
 
     drumAndBassLine(){
-        let pattern = this.processPattern(this.createBassBeatChordPattern());
         for (let i = 0; i < this.sounds.length; i++) {
+            let pattern = this.processPattern(this.createBassBeatChordPattern());
             for (let j = 0; j < this.beats; j ++)
             {
                 instruments['bass']['grid'][i][j].active = instruments['drums']['grid'][0][j].active;
@@ -127,10 +108,9 @@ class Bass extends Instrument {
             console.error(`Octave "${octave}" is out of range. Please use an octave between 0 and 7.`);
             return;
         }
-        let frequency = this.noteFrequencies[note][0];
+        let playbackRate = this.noteFrequencies[note];
        
-        if (frequency) {
-            let playbackRate = frequency / 261.63; // C3 reference note
+        if (playbackRate) {
             bass808.rate(playbackRate); // Set the sample playback rate
             bass808.play(); // Play the sample
         } else {

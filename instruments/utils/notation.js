@@ -12,18 +12,18 @@ class Notation{
 
 
     noteFrequencies = {
-    'C':    [261.63], // Frequency for C3
-    'C#':   [261.63 * Math.pow(2, 1/12)], // C#3
-    'D':    [261.63 * Math.pow(2, 2/12)], // D3
-    'D#':   [261.63 * Math.pow(2, 3/12)], // D#3
-    'E':    [261.63 * Math.pow(2, 4/12)], // E3
-    'F':    [261.63 * Math.pow(2, 5/12)], // F3
-    'F#':   [261.63 * Math.pow(2, 6/12)], // F#3
-    'G':    [261.63 * Math.pow(2, 7/12)], // G3
-    'G#':   [261.63 * Math.pow(2, 8/12)], // G#3
-    'A':    [261.63/2 * Math.pow(2, 9/12)], // A3
-    'A#':   [261.63/2 * Math.pow(2, 10/12)], // A#3
-    'B':    [261.63/2 * Math.pow(2, 11/12)] // B3
+    'C':    1, // Frequency for C3
+    'C#':   Math.pow(2, 1/12), // C#3
+    'D':    Math.pow(2, 2/12), // D3
+    'D#':   Math.pow(2, 3/12), // D#3
+    'E':    Math.pow(2, 4/12), // E3
+    'F':    Math.pow(2, 5/12), // F3
+    'F#':   Math.pow(2, 6/12), // F#3
+    'G':    Math.pow(2, 7/12), // G3
+    'G#':   Math.pow(2, 8/12), // G#3
+    'A':    Math.pow(2, 9/12), // A3
+    'A#':   Math.pow(2, 10/12), // A#3
+    'B':    Math.pow(2, 11/12) // B3
 };
 
     // Constructor
@@ -31,7 +31,7 @@ class Notation{
         this.scale = scale;
         this.mode = mode; 
         this.strings = this.strings;
-        this.octaveNum = 4;
+        this.octaveNum = 0;
     }
 
 
