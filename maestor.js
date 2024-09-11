@@ -2,9 +2,7 @@
 
 // TODO 1: Add seventh chord option
 // TODO 2: Add option to add another drum beat with the same length but different sounds
-// TODO 3: Ensure pause option stops without redrawing the fretboard
-// TODO 4: Add option to click the next chord without playing it
-// TODO 5: Implement multithreading
+// TODO 3: Add option to click the next chord without playing it
 
 class Maestor {
   constructor(w, h) {
